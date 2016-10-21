@@ -33,7 +33,8 @@ module.exports = {
       "plugin:import/warnings"
   ],
   plugins: [
-      "import"
+      "import",
+      "html"
   ],
   settings: {
       "import/resolver": "webpack",
