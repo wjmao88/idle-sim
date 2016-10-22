@@ -1,40 +1,25 @@
-import World from './models/World';
 
-import MainPage from './components/mainPage.vue';
+import Game from './services/Game';
+
+import MainPage from './components/MainPage.vue';
 
 import Vue from 'vue';
 
-(function(){
-  const app = new Vue({
+const app = new Vue({
+    created() {
+        this.game = new Game();
+        this.game.load();
+    },
 
     render(createElement) {
         return createElement(MainPage, {
             props: {
-                world: this.world
+                game: this.game
             }
         });
-    },
-
-    mounted() {
-        this.world = new World();
-
-        this.tickWorld();
-    },
-
-    methods: {
-        tickWorld(){
-            this.world.cycle();
-            if (this.shouldTickWorld()) {
-                window.setTimeout(() => this.tickWorld(), 3000);
-            }
-        },
-        shouldTickWorld(){
-            return true;
-        }
     },
 
     components: {
         MainPage
     }
-  }).$mount('#app-container');
-})();
+}).$mount('#app-container');
