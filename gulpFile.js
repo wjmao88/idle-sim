@@ -15,11 +15,10 @@ const webpackConfg = require('./webpack.config.js');
 gulp.task('scripts', function() {
     return gulp.src('app/index.js')
         .pipe(named())
-        .pipe(webpack(webpackConfg))
         .pipe(eslint('.eslintrc.js'))
+        .pipe(webpack(webpackConfg))
         //.pipe(rename({ suffix: '.min' }))
-        .pipe(gulp.dest('dist'))
-        .pipe(notify({ message: 'Scripts task complete' }));
+        .pipe(gulp.dest('dist'));
 });
 
 gulp.task('sass', function() {
@@ -29,8 +28,7 @@ gulp.task('sass', function() {
         .pipe(autoprefixer('last 2 version'))
         .pipe(rename({ suffix: '.min' }))
         .pipe(cssnano())
-        .pipe(gulp.dest('dist/'))
-        .pipe(notify({ message: 'Styles task complete' }));
+        .pipe(gulp.dest('dist/'));
 });
 
 gulp.task('html', function() {

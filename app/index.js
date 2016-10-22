@@ -1,22 +1,18 @@
-
-import Game from './services/Game';
+import Vue from 'vue';
 
 import MainPage from './components/MainPage.vue';
 
-import Vue from 'vue';
+import store from './store';
 
 const app = new Vue({
+    store,
+
     created() {
-        this.game = new Game();
-        this.game.load();
+        this.$store.dispatch('loadGame');
     },
 
     render(createElement) {
-        return createElement(MainPage, {
-            props: {
-                game: this.game
-            }
-        });
+        return createElement(MainPage);
     },
 
     components: {

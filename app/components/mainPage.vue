@@ -3,7 +3,7 @@
 
 <div>
     <div class="debug">
-        {{worldString}}
+        {{world.cycle}}
 
         <button v-on:click="resetWorld()">reset</button>
     </div>
@@ -19,28 +19,32 @@
 
 <script>
 
-import World from '../actions/World';
-
 import OneCity from './OneCity.vue';
+
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
     name: 'MainPage',
-    props: ['game'],
-    data() {
-        return {
-            world: this.game.world
-        };
-    },
     computed: {
-        worldString() {
-            return `World: ${this.world.cycles}`;
-        }
+        ...mapGetters(['world'])
     },
     methods: {
-        resetWorld() {
-            this.game.setWorld();
-            this.world = this.game.world;
+        ...mapActions(['resetWorld', 'saveGame']),
+
+        cycleWorld(argument) {
+            this.$store.commit('cycleWorld');
+
+            if (this.world.cycles%10 === 1) {
+                this.saveGame();
+            }
+
+            window.setTimeout(() => {
+                this.cycleWorld();
+            }, 1000);
         }
+    },
+    mounted() {
+        this.cycleWorld();
     },
     components: {
         OneCity
