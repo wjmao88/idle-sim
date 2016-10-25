@@ -3,9 +3,12 @@
 
 <div>
     <div class="debug">
-        {{world.cycle}}
+        Money: {{world.money}}
 
-        <button v-on:click="resetWorld()">reset</button>
+        <button v-on:click="cycleWorld(1)">cycle 1</button>
+        <button v-on:click="cycleWorld(10)">cycle 10</button>
+        <button v-on:click="cycleWorld(100)">cycle 100</button>
+        <button v-on:click="resetAndSave()">reset</button>
     </div>
 
     <one-city
@@ -25,26 +28,48 @@ import { mapGetters, mapActions } from 'vuex';
 
 export default {
     name: 'MainPage',
+    data() {
+        return {
+            cyclesLeft: 0
+        };
+    },
     computed: {
         ...mapGetters(['world'])
     },
     methods: {
         ...mapActions(['resetWorld', 'saveGame']),
+        resetAndSave() {
+            this.resetWorld();
+            this.saveGame();
+        },
 
-        cycleWorld(argument) {
+        cycleWorld(number) {
+            if (this.cyclesLeft > 0){
+                this.cyclesLeft += number;
+            } else {
+                this.cyclesLeft = number;
+                this.doCycleWorld();
+            }
+        },
+
+        doCycleWorld() {
+            if (this.cyclesLeft <= 0) {
+                this.saveGame();
+                return;
+            }
+
             this.$store.commit('cycleWorld');
 
             if (this.world.cycles%10 === 1) {
                 this.saveGame();
             }
 
+            this.cyclesLeft -= 1;
+
             window.setTimeout(() => {
-                this.cycleWorld();
+                this.doCycleWorld();
             }, 1000);
         }
-    },
-    mounted() {
-        this.cycleWorld();
     },
     components: {
         OneCity

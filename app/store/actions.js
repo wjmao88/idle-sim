@@ -1,9 +1,9 @@
 
 import newWorld from '../gameConfig/newWorld';
 
-import Persistence from '../services/Persistence';
+import factoriesConfig from '../gameConfig/factories';
 
-import World from '../actions/World';
+import Persistence from '../services/Persistence';
 
 export const resetWorld = function(context) {
     context.commit('setWorld', _.cloneDeep(newWorld));
@@ -20,5 +20,53 @@ export const loadGame = function(context) {
 };
 
 export const saveGame = function({ getters }) {
-    return Persistence.saveGame(World.toJSON(getters.world));
+    return Persistence.saveGame(getters.world);
+};
+
+//City ===============
+export const cityExpandFactory = function({ getters, commit }, {cityId, factoryKey, factoryConfig}){
+    if (true) {
+        commit('exchangeResourceForFactoryLevel', {
+            cityId,
+            factoryKey,
+            cost: {}
+        });
+    }
+};
+
+export const cityWageChange = function({ commit }, payload){
+    if (payload.wage < 0) {
+        return;
+    }
+    commit('commitCityWageChange', payload);
+};
+
+export const moveWorkersToFactory = function(
+    { getters, commit },
+    { cityId, factoryKey, changeAmount }){
+
+    var city = getters.world.cities[cityId];
+    var factory = city.factories[factoryKey];
+    var popType = factoriesConfig[factoryKey].workerPopType;
+
+    //change amount is from the standpoint of moving to the factory
+    //so + is moving to, - is moving from
+
+    //lower count if not enough available
+    if (city.population[popType].idle < changeAmount){
+        changeAmount = city.population[popType].idle;
+    }
+    //negative changeAmount is moving from the factory
+    if (factory.workerCount < -changeAmount) {
+        changeAmount = factory.workerCount;
+    }
+
+    if (changeAmount !== 0){
+        commit('addWorkerToFactory', {
+            cityId,
+            factoryKey,
+            changeAmount,
+            popType
+        });
+    }
 };

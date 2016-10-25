@@ -1,23 +1,63 @@
+<style scoped lang="sass">
+
+.city-info-row {
+    width: 100%;
+}
+
+.city-details {
+    padding: 1em;
+    display: flex;
+    flex-direction: row;
+
+    .left-column {
+        flex: 0 0 auto;
+        padding: 1em;
+    }
+
+    .right-column {
+        flex: 1 0 auto;
+        padding: 1em;
+    }
+}
+
+</style>
 
 <template>
 
-<div>
-    <div class="city">
-        {{cityString}}
+<div class="one-city">
+    <div class="city-info-row">
+        City: {{city.id}} {{city.cycles}}
     </div>
 
-    <div class="city-build-factory">
-        <h2>Build Manufactory</h2>
-        <button v-for="factoryConfig in factoriesConfig"
-            v-on:click="buildFactory(factoryConfig)">
-            {{factoryConfig.name}}
-        </button>
-    </div>
+    <div class="city-details">
+        <div class="left-column">
+            <resource-table :city="city"></resource-table>
+        </div>
 
-    <div class="factories-panel">
-        <one-factory v-for="factory in city.factories"
-            :key="factory.id"
-            :factory="factory"></one-factory>
+        <div class="right-column">
+            <div class="workers-panel">
+                <population-table :city="city"></population-table>
+            </div>
+
+            <div class="factories-panel">
+
+                <div class="build-tab">
+                    <h2>Build Manufactory</h2>
+                    <button v-for="(config, key) in factoriesConfig"
+                        v-on:click="buildFactory(key, config)">
+                        {{config.name}}
+                    </button>
+                </div>
+
+                <div class="factories-tab">
+                    <one-factory v-for="(instance, key) in city.factories"
+                        :key="key"
+                        :type-key="key"
+                        :city-id="city.id"
+                        :instance="instance"></one-factory>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -26,32 +66,36 @@
 <script>
 
 import OneFactory from './OneFactory.vue';
-import City from '../actions/City';
+import PopulationTable from './PopulationTable.vue';
+import ResourceTable from './ResourceTable.vue';
 
 import factoriesConfig from '../gameConfig/factories';
+import popTypesConfig from '../gameConfig/popTypes';
+import resTypesConfig from '../gameConfig/resources';
 
 export default {
     name: 'OneCity',
     props: ['city'],
     data() {
         return {
-            factoriesConfig
+            factoriesConfig,
+            popTypesConfig,
+            resTypesConfig
         };
     },
     methods: {
-        buildFactory(factoryConfig) {
-            return City.addFactory(this.city, factoryConfig);
-        }
-    },
-    computed: {
-        cityString() {
-            return `
-                ${this.city.id} ${this.city.cycles}
-            `;
+        buildFactory(factoryKey, factoryConfig) {
+            return this.$store.dispatch('cityExpandFactory', {
+                cityId: this.city.id,
+                factoryKey,
+                factoryConfig
+            });
         }
     },
     components: {
-        OneFactory
+        OneFactory,
+        PopulationTable,
+        ResourceTable
     }
 };
 

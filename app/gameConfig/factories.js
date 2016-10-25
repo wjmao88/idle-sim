@@ -1,47 +1,22 @@
-export default [
-    {
-        'name': 'lumber mill',
+export default {
+    'F1_LUMBER': {
+        'key': 'F1_LUMBER',
+        'name': 'Lumber Mill',
         'district': 'forest',
-
-        'input': [],
-        'output': [
-            {
-                'resourceType': 'lumber',
-                'amount': 1
-            }
-        ]
+        'workerPopType': 'PT_BASE',
+        'input': {},
+        'output': {
+            'RS_LUMBER': 10
+        }
     },
-    {
-        'name': 'grain farm',
+    'F2_GRAIN': {
+        'key': 'F2_GRAIN',
+        'name': 'Grain Farm',
         'district': 'fields',
-
-        'input': [],
-        'output': [
-            {
-                'resourceType': 'wheat',
-                'amount': 1
-            }
-        ]
+        'workerPopType': 'PT_BASE',
+        'input': {},
+        'output': {
+            'RS_GRAIN': 10
+        }
     }
-    // ,
-    // {
-    //     'name': 'cattle farm',
-    //     'district': 'fields',
-
-    //     'input': [],
-    //     'output': [
-    //         {
-    //             'resourceType': 'meat',
-    //             'amount': 1
-    //         },
-    //         {
-    //             'resourceType': 'wool',
-    //             'amount': 1
-    //         },
-    //         {
-    //             'resourceType': 'leather',
-    //             'amount': 1
-    //         }
-    //     ]
-    // }
-];
+};
