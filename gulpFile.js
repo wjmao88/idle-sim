@@ -12,11 +12,17 @@ const rename = require('gulp-rename');
 const notify = require('gulp-notify');
 const webpackConfg = require('./webpack.config.js');
 
+const logError = function(error){
+    console.warn(error);
+
+    this.emit('end');
+};
+
 gulp.task('scripts', function() {
     return gulp.src('app/index.js')
         .pipe(named())
-        .pipe(eslint('.eslintrc.js'))
-        .pipe(webpack(webpackConfg))
+        .pipe(eslint('.eslintrc.js').on('error', logError))
+        .pipe(webpack(webpackConfg).on('error', logError))
         //.pipe(rename({ suffix: '.min' }))
         .pipe(gulp.dest('dist'));
 });
@@ -37,11 +43,17 @@ gulp.task('html', function() {
         .pipe(gulp.dest('dist/'));
 });
 
+gulp.task('vue-material-css', function(){
+    return gulp.src('node_modules/vue-material/dist/vue-material.css')
+        .pipe(named())
+        .pipe(gulp.dest('dist/'));
+})
+
 gulp.task('watch', function() {
 
   try {
     // Watch .scss files
-    gulp.watch('app/**/*.sass', ['sass']);
+    gulp.watch('app/**/*.sass', ['sass', 'vue-material-css']);
 
     // Watch .js files
     gulp.watch('app/**/*.js', ['scripts']);
