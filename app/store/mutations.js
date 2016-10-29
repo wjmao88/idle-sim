@@ -8,7 +8,7 @@ import mergeResourceMaps from './utils/mergeResourceMaps';
 
 import {production, consumption} from './utils/productionConsumption';
 
-//import {cityGrowth, ensureWorkerCounts} from './utils/populationChanges';
+import {cityGrowth, ensureWorkerCounts} from './utils/populationChanges';
 
 export const setWorld = function(state, world){
     state.world = world;

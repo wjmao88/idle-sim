@@ -53,8 +53,6 @@ export const ensureWorkerCounts = function(city, diff, popType){
 
   var index = Math.floor(Math.random() * unlocked.length);
 
-
-  if (unlocked[index.workerCount] < 0) {
   if (unlocked[index.workerCount] < 0) {
     var remainingChange = 0 - unlocked[index.workerCount];
     var index2 = Math.floor(Math.random() * unlocked.length);

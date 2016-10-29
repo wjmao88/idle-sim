@@ -5,17 +5,18 @@ import factoriesConfig from '../gameConfig/factories';
 
 import Persistence from '../services/Persistence';
 
-export const resetWorld = function(context) {
-    context.commit('setWorld', _.cloneDeep(newWorld));
+export const resetWorld = function({ commit, dispatch }) {
+    commit('setWorld', _.cloneDeep(newWorld));
+    dispatch('saveGame');
 };
 
-export const loadGame = function(context) {
+export const loadGame = function({ commit, dispatch }) {
     var loaded = Persistence.loadGame();
 
     if (_.isEmpty(loaded)) {
-        context.dispatch('resetWorld');
+        dispatch('resetWorld');
     } else {
-        context.commit('setWorld', loaded);
+        commit('setWorld', loaded);
     }
 };
 
@@ -23,6 +24,11 @@ export const saveGame = function({ getters }) {
     return Persistence.saveGame(getters.world);
 };
 
+export const cycleWorld = function({ commit, dispatch }) {
+    commit('cycleWorld');
+
+    dispatch('saveGame');
+};
 //City ===============
 export const cityExpandFactory = function({ getters, commit }, {cityId, factoryKey}){
     if (true) {
