@@ -1,79 +1,82 @@
+<style scoped lang="sass">
+
+</style>
 
 <template>
 
-<div>
-    <div class="debug">
-        Money: {{world.money}}
+<div class="main-page">
+  <div class="md-button-group">
+    <md-button v-on:click="cycleWorld(1)">cycle 1</md-button>
+    <md-button v-on:click="cycleWorld(10)">cycle 10</md-button>
+    <md-button v-on:click="cycleWorld(100)">cycle 100</md-button>
+    <md-button v-on:click="resetAndSave()">reset</md-button>
+  </div>
 
-        <button v-on:click="cycleWorld(1)">cycle 1</button>
-        <button v-on:click="cycleWorld(10)">cycle 10</button>
-        <button v-on:click="cycleWorld(100)">cycle 100</button>
-        <button v-on:click="resetAndSave()">reset</button>
-    </div>
+  <main-nav-bar></main-nav-bar>
 
-    <one-city
-        v-for="city in world.cities"
-        :key="city.id"
-        v-bind:city="city">
-    </one-city>
+  <router-view></router-view>
+
+  <main-footer></main-footer>
 </div>
 
 </template>
 
 <script>
 
-import OneCity from './OneCity.vue';
-
 import { mapGetters, mapActions } from 'vuex';
 
+import MainNavBar from './MainNavBar.vue';
+import MainFooter from './MainFooter.vue';
+
 export default {
-    name: 'MainPage',
-    data() {
-        return {
-            cyclesLeft: 0
-        };
+  name: 'MainPage',
+  data() {
+      return {
+          cyclesLeft: 0
+      };
+  },
+  computed: {
+    ...mapGetters(['world'])
+  },
+  methods: {
+    ...mapActions(['resetWorld', 'saveGame']),
+    resetAndSave() {
+      this.resetWorld();
+      this.saveGame();
     },
-    computed: {
-        ...mapGetters(['world'])
+
+    cycleWorld(number) {
+      if (this.cyclesLeft > 0){
+        this.cyclesLeft += number;
+      } else {
+        this.cyclesLeft = number;
+        this.doCycleWorld();
+      }
     },
-    methods: {
-        ...mapActions(['resetWorld', 'saveGame']),
-        resetAndSave() {
-            this.resetWorld();
-            this.saveGame();
-        },
 
-        cycleWorld(number) {
-            if (this.cyclesLeft > 0){
-                this.cyclesLeft += number;
-            } else {
-                this.cyclesLeft = number;
-                this.doCycleWorld();
-            }
-        },
+    doCycleWorld() {
+      if (this.cyclesLeft <= 0) {
+        this.saveGame();
+        return;
+      }
 
-        doCycleWorld() {
-            if (this.cyclesLeft <= 0) {
-                this.saveGame();
-                return;
-            }
+      this.$store.commit('cycleWorld');
 
-            this.$store.commit('cycleWorld');
+      if (this.world.cycles%10 === 1) {
+        this.saveGame();
+      }
 
-            if (this.world.cycles%10 === 1) {
-                this.saveGame();
-            }
+      this.cyclesLeft -= 1;
 
-            this.cyclesLeft -= 1;
-
-            window.setTimeout(() => {
-                this.doCycleWorld();
-            }, 1000);
-        }
-    },
-    components: {
-        OneCity
+      window.setTimeout(() => {
+        this.doCycleWorld();
+      }, 1000);
     }
+  },
+  components: {
+    MainNavBar,
+    MainFooter
+  }
 };
 
 </script>

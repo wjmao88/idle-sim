@@ -3,48 +3,61 @@ import popTypes from '../../gameConfig/popTypes';
 import factoriesConfig from '../../gameConfig/factories';
 
 export const cityGrowth = function(city){
-    _.each(city.population, function(popInfo, popType){
-        var sign = popInfo.happiness > 1? 1 : -1;
-        var value = Math.abs(popInfo.happiness - 1);
+  _.each(city.population, function(popInfo, popType){
+    var direction = popInfo.happiness > 1? 1 : -1;
+    var value = Math.abs(popInfo.happiness - 1);
 
-        var seed = Math.random();
+    var seed = Math.random();
 
-        var change = seed < value? sign : 0;
+    if (seed < value){
+      popTypeMigration(city, popType, direction);
+    }
+  });
 
-        popInfo.total += change;
+  _.each(city.population, function(popInfo, popType){
+    if (popInfo.working > popInfo.total) {
+      ensureWorkerCounts(city, popInfo.working - popInfo.total, popType);
+      popInfo.working = popInfo.total;
+      popInfo.idle = 0;
+    } else {
+      popInfo.idle = popInfo.total - popInfo.working;
+    }
 
-        if (popInfo.total < 0) {
-            popInfo.total = 0;
-        }
+    //rescue from dead game
+    if (popInfo.total === 0) {
+      popInfo.total = 1;
+      popInfo.idle = 1;
+    }
+  });
+};
 
-        if (popInfo.working > popInfo.total) {
-            ensureWorkerCounts(city, popInfo.working - popInfo.total, popType);
-            popInfo.working = popInfo.total;
-            popInfo.idle = 0;
-        } else {
-            popInfo.idle = popInfo.total - popInfo.working;
-        }
+export const popTypeMigration = function(city, popType, direction){
 
-        //rescue from dead game
-        if (popInfo.total === 0) {
-            popInfo.total = 1;
-            popInfo.idle = 1;
-        }
-    });
+    if (popInfo.total < 0) {
+      popInfo.total = 0;
+    }
 };
 
 export const ensureWorkerCounts = function(city, diff, popType){
 
-    var factories = _.filter(city.factories, function(factory, factoryKey){
-        return factoriesConfig[factoryKey].workerPopType === popType &&
-            factory.workerCount > 0;
-    });
+  var eligibleFactories = _.filter(city.factories, function(factory, factoryKey){
+    return factoriesConfig[factoryKey].workerPopType === popType &&
+    factory.workerCount > 0;
+  });
 
-    if (factories.length === 0) {
-        console.error('somthing is wrong with worker count', city.id, factoryKey);
-    }
+  if (factories.length === 0) {
+    console.error('somthing is wrong with worker count', city.id, factoryKey);
+  }
 
-    var index = Math.floor(Math.random() * factories.length);
+  var {locked, unlocked} = _.groupBy(eligibleFactories, 'lockStatus');
 
-    factories[index].workerCount -= diff;
+  var index = Math.floor(Math.random() * unlocked.length);
+
+
+  if (unlocked[index.workerCount] < 0) {
+  if (unlocked[index.workerCount] < 0) {
+    var remainingChange = 0 - unlocked[index.workerCount];
+    var index2 = Math.floor(Math.random() * unlocked.length);
+    unlocked[index2].workerCount -= remainingChange;
+  }
 };

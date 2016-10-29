@@ -24,7 +24,8 @@ gulp.task('scripts', function() {
         .pipe(eslint('.eslintrc.js').on('error', logError))
         .pipe(webpack(webpackConfg).on('error', logError))
         //.pipe(rename({ suffix: '.min' }))
-        .pipe(gulp.dest('dist'));
+        .pipe(gulp.dest('dist'))
+        .pipe(notify('scripts done'));
 });
 
 gulp.task('sass', function() {

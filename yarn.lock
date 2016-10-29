@@ -217,6 +217,10 @@ autoprefixer@^6.0.0, autoprefixer@^6.3.1:
     postcss "^5.2.4"
     postcss-value-parser "^3.2.3"
 
+autosize@^3.0.17:
+  version "3.0.18"
+  resolved "https://learningobjects.artifactoryonline.com/learningobjects/api/npm/npm-virtual/autosize/-/autosize-3.0.18.tgz#75ecffa2debb2c6398001a8847a570ad6bf94fd4"
+
 aws-sign2@~0.6.0:
   version "0.6.0"
   resolved "https://registry.yarnpkg.com/aws-sign2/-/aws-sign2-0.6.0.tgz#14342dd38dbcc94d0e5b87d763cd63612c0e794f"
@@ -1492,6 +1496,10 @@ editorconfig@^0.13.2:
     commander "^2.9.0"
     lru-cache "^3.2.0"
     sigmund "^1.0.1"
+
+element.scrollintoviewifneeded-polyfill@^1.0.1:
+  version "1.0.1"
+  resolved "https://learningobjects.artifactoryonline.com/learningobjects/api/npm/npm-virtual/element.scrollintoviewifneeded-polyfill/-/element.scrollintoviewifneeded-polyfill-1.0.1.tgz#89a023481e81e7dfd72105c4c9170e83b357454f"
 
 elliptic@^6.0.0:
   version "6.3.2"
@@ -4377,6 +4385,10 @@ sax@~1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.1.tgz#7b8e656190b228e81a66aea748480d828cd2d37a"
 
+"scopedQuerySelectorShim@github:lazd/scopedQuerySelectorShim":
+  version "0.0.0"
+  resolved "https://codeload.github.com/lazd/scopedQuerySelectorShim/tar.gz/0ef4855a7944207510cdc0375a43956b2fc18410"
+
 semver@^4.1.0:
   version "4.3.6"
   resolved "https://registry.yarnpkg.com/semver/-/semver-4.3.6.tgz#300bc6e0e86374f7ba61068b5b1ecd57fc6532da"
@@ -4923,7 +4935,7 @@ vm-browserify@0.0.4:
   dependencies:
     indexof "0.0.1"
 
-vue:
+vue, vue@^2.0.2:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.0.3.tgz#3f7698f83d6ad1f0e35955447901672876c63fde"
 
@@ -4949,6 +4961,19 @@ vue-loader:
     vue-template-compiler "^2.0.0-rc.3"
     vue-template-es2015-compiler "^1.0.0"
 
+vue-material:
+  version "0.2.0"
+  resolved "https://learningobjects.artifactoryonline.com/learningobjects/api/npm/npm-virtual/vue-material/-/vue-material-0.2.0.tgz#2925c02858ea577bbfae70020c228cab5294d90d"
+  dependencies:
+    autosize "^3.0.17"
+    element.scrollintoviewifneeded-polyfill "^1.0.1"
+    scopedQuerySelectorShim "github:lazd/scopedQuerySelectorShim"
+    vue "^2.0.2"
+
+vue-router:
+  version "2.0.1"
+  resolved "https://learningobjects.artifactoryonline.com/learningobjects/api/npm/npm-virtual/vue-router/-/vue-router-2.0.1.tgz#88b83cdc9497bad5b20b579e847a7e7240e221dd"
+
 vue-style-loader@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/vue-style-loader/-/vue-style-loader-1.0.0.tgz#abeb7bd0f46313083741244d3079d4f14449e049"
@@ -4969,6 +4994,10 @@ vue-template-es2015-compiler@^1.0.0:
 vuex:
   version "2.0.0"
   resolved "https://learningobjects.artifactoryonline.com/learningobjects/api/npm/npm-virtual/vuex/-/vuex-2.0.0.tgz#26befa44de220f009e432d1027487bff29571cee"
+
+vuex-router-sync:
+  version "2.1.1"
+  resolved "https://learningobjects.artifactoryonline.com/learningobjects/api/npm/npm-virtual/vuex-router-sync/-/vuex-router-sync-2.1.1.tgz#604da1346dc0668140ee552d54ceab067711142e"
 
 watchpack@^0.2.1:
   version "0.2.9"

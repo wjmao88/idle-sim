@@ -1,0 +1,20 @@
+@import colors
+
+.tab-headers-container
+  @extend .theme-button
+  width: 100%
+  display: flex
+  flex-direction: row
+
+  .tab-header
+    border-radius: 1em 1em 0 0
+    border: solid $color-white
+    border-width: 1px 1px 0
+    padding: 0.5em 1em
+    margin: 1em 1em 0
+
+    &.active
+      border-bottom: 1px
+
+    a
+      color: $color-white

@@ -1,21 +1,28 @@
+
 import Vue from 'vue';
 
-import MainPage from './components/MainPage.vue';
-
 import store from './store';
+
+import router from './router';
+
+import { sync } from 'vuex-router-sync';
+
+import App from './App.vue';
+
+import './material';
+
+sync(store, router);
 
 const app = new Vue({
     store,
 
-    created() {
-        this.$store.dispatch('loadGame');
-    },
+    router,
 
     render(createElement) {
-        return createElement(MainPage);
+        return createElement(App);
     },
 
     components: {
-        MainPage
+        App
     }
 }).$mount('#app-container');

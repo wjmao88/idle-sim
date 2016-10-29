@@ -5,7 +5,7 @@ export default {
         name: 'peasant class',
         type: 'baseClass',
         consumption: {
-            'RS_GRAIN': 3,
+            'RS_GRAIN': 8,
             'RS_LUMBER': 1
         }
     },

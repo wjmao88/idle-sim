@@ -4,9 +4,10 @@ export default {
         'name': 'Lumber Mill',
         'district': 'forest',
         'workerPopType': 'PT_BASE',
+        'workerMaxPerLevel': 10,
         'input': {},
         'output': {
-            'RS_LUMBER': 10
+            'RS_LUMBER': 20
         }
     },
     'F2_GRAIN': {
@@ -14,9 +15,10 @@ export default {
         'name': 'Grain Farm',
         'district': 'fields',
         'workerPopType': 'PT_BASE',
+        'workerMaxPerLevel': 10,
         'input': {},
         'output': {
-            'RS_GRAIN': 10
+            'RS_GRAIN': 20
         }
     }
 };

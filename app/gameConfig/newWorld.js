@@ -20,7 +20,7 @@ export default {
             },
             population: {
                 'PT_BASE': {
-                    wage: 10,
+                    wage: 90,
                     total: 10,
                     working: 0,
                     idle: 10,

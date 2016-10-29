@@ -24,7 +24,7 @@ export const saveGame = function({ getters }) {
 };
 
 //City ===============
-export const cityExpandFactory = function({ getters, commit }, {cityId, factoryKey, factoryConfig}){
+export const cityExpandFactory = function({ getters, commit }, {cityId, factoryKey}){
     if (true) {
         commit('exchangeResourceForFactoryLevel', {
             cityId,
@@ -43,9 +43,9 @@ export const cityWageChange = function({ commit }, payload){
 
 export const moveWorkersToFactory = function(
     { getters, commit },
-    { cityId, factoryKey, changeAmount }){
+    { factoryKey, changeAmount }){
 
-    var city = getters.world.cities[cityId];
+    var city = getters.city;
     var factory = city.factories[factoryKey];
     var popType = factoriesConfig[factoryKey].workerPopType;
 
@@ -63,7 +63,7 @@ export const moveWorkersToFactory = function(
 
     if (changeAmount !== 0){
         commit('addWorkerToFactory', {
-            cityId,
+            cityId: city.id,
             factoryKey,
             changeAmount,
             popType
