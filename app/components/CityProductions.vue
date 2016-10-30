@@ -12,7 +12,7 @@
 
 <div class="city-factories">
   <factory-card
-    v-for="factory in cityFactories"
+    v-for="factory in cityFactoriesInfo"
     :key="factory.key"
     :factory="factory">
   </factory-card>
@@ -29,18 +29,9 @@ import PopulationTable from './PopulationTable.vue';
 import ResourceTable from './ResourceTable.vue';
 
 export default {
-  name: 'CityFactories',
+  name: 'CityProductions',
   computed: {
-    ...mapGetters(['cityFactories'])
-  },
-  methods: {
-    ...mapActions(['cityExpandFactory']),
-    buildFactory(factoryKey) {
-      return this.cityExpandFactory({
-        cityId: this.city.id,
-        factoryKey
-      });
-    }
+    ...mapGetters(['cityFactoriesInfo'])
   },
   components: {
     FactoryCard

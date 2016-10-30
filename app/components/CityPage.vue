@@ -8,24 +8,22 @@
 
   <md-toolbar>
     <h1 class="md-title" style="flex: 1">
-      {{name}}
+      {{currentCity.name}}
     </h1>
 
-    <router-link :to="{ name: 'population' }"
+    <router-link :to="{ name: 'consumptions' }"
       class="md-button md-accent"
       active-class="md-raised">
-      Population
+      Consumption
     </router-link>
 
-    <router-link :to="{ name: 'factories' }"
+    <router-link :to="{ name: 'productions' }"
       class="md-button md-accent"
       active-class="md-raised">
-      Factories
+      Production
     </router-link>
 
   </md-toolbar>
-
-  <!-- <resource-table :city="city"></resource-table> -->
 
   <transition name="slide">
     <router-view></router-view>
@@ -43,13 +41,9 @@ import ResourceTable from './ResourceTable.vue';
 export default {
   name: 'CityPage',
   computed: {
-    ...mapGetters(['name']),
-    cityInfo() {
-      return this.$store.state;
-    }
-  },
-  components: {
-    ResourceTable
+    ...mapGetters([
+      'currentCity'
+    ]),
   }
 };
 

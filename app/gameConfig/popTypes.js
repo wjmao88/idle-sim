@@ -2,8 +2,7 @@ export default {
     'PT_BASE': {
         key: 'PT_BASE',
         priority: 1,
-        name: 'peasant class',
-        type: 'baseClass',
+        name: 'peasant',
         consumption: {
             'RS_GRAIN': 8,
             'RS_LUMBER': 1
@@ -12,8 +11,7 @@ export default {
     'PT_LOW': {
         key: 'PT_LOW',
         priority: 10,
-        name: 'lower class',
-        type: 'lowClass',
+        name: 'lower',
         consumption: {
 
         }
@@ -21,8 +19,7 @@ export default {
     'PT_MIDDLE': {
         key: 'PT_MIDDLE',
         priority: 100,
-        name: 'middle class',
-        type: 'middleClass',
+        name: 'middle',
         consumption: {
 
         }
@@ -30,8 +27,7 @@ export default {
     'PT_HIGH': {
         key: 'PT_HIGH',
         priority: 1000,
-        name: 'upper class',
-        type: 'highClass',
+        name: 'upper',
         consumption: {
 
         }

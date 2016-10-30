@@ -5,23 +5,23 @@ import WorldPage from './components/WorldPage.vue';
 import CityPage from './components/CityPage.vue';
 import ResearchPage from './components/ResearchPage.vue';
 import MainPage from './components/MainPage.vue';
-import CityPopulation from './components/CityPopulation.vue';
-import CityFactories from './components/CityFactories.vue';
+import CityConsumptions from './components/CityConsumptions.vue';
+import CityProductions from './components/CityProductions.vue';
 
 import store from './store';
 
 Vue.use(VueRouter);
 
-const population = {
-  name: 'population',
-  path: 'population',
-  component: CityPopulation
+const consumptions = {
+  name: 'consumptions',
+  path: 'consumptions',
+  component: CityConsumptions
 };
 
-const factories = {
-  name: 'factories',
-  path: 'factories',
-  component: CityFactories
+const productions = {
+  name: 'productions',
+  path: 'productions',
+  component: CityProductions
 };
 
 const city = {
@@ -30,8 +30,8 @@ const city = {
   component: CityPage,
   children: [
     //{ path:'', redirect:'population' },
-    factories,
-    population
+    consumptions,
+    productions
   ]
 };
 
