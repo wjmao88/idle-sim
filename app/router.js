@@ -29,7 +29,7 @@ const city = {
   path: 'city/:cityId',
   component: CityPage,
   children: [
-    { path:'', redirect:'population' },
+    //{ path:'', redirect:'population' },
     factories,
     population
   ]

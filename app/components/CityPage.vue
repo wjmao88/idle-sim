@@ -8,7 +8,7 @@
 
   <md-toolbar>
     <h1 class="md-title" style="flex: 1">
-      {{city.name}}
+      {{name}}
     </h1>
 
     <router-link :to="{ name: 'population' }"
@@ -25,7 +25,7 @@
 
   </md-toolbar>
 
-  <resource-table :city="city"></resource-table>
+  <!-- <resource-table :city="city"></resource-table> -->
 
   <transition name="slide">
     <router-view></router-view>
@@ -41,9 +41,12 @@ import { mapGetters } from 'vuex';
 import ResourceTable from './ResourceTable.vue';
 
 export default {
-  name: 'OneCity',
+  name: 'CityPage',
   computed: {
-    ...mapGetters(['city', 'params']),
+    ...mapGetters(['name']),
+    cityInfo() {
+      return this.$store.state;
+    }
   },
   components: {
     ResourceTable
