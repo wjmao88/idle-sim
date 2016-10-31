@@ -25,7 +25,7 @@ export const ratio = operation((top, bottom) => {
 });
 
 export const sum = operation((...values) => {
-  return _.sum(...values);
+  return _.sum(values);
 });
 
 export const min = operation((...values) => {

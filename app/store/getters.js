@@ -28,13 +28,11 @@ export const citiesInfo = (state, getters) => {
 //cycle ==========
 
 export const cities = (state, getters) => {
-  return state.cities;
+  return state.world.cities;
 };
 
 export const citiesDemand = (state, getters) => {
-  return _.mapValues(getters.cities, (city) => {
-
-    const popTotal = city.population[popType].total;
+  const demand = _.mapValues(getters.cities, (city) => {
 
     const demandByPop = _.map(city.population, (popStatus, popKey) => {
       return resourceMath.scale(popConfigs[popKey].consumption, popStatus.total);
@@ -42,6 +40,8 @@ export const citiesDemand = (state, getters) => {
 
     return resourceMath.sum(...demandByPop);
   });
+
+  return demand;
 };
 
 /*

@@ -45,23 +45,25 @@ export const cycleCities = function(
   const citiesRestockTarget = getters.citiesRestockTarget;
 
   _.each(getters.world.cities, (city, cityId) => {
+    const demand = citiesDemand[cityId];
+    const target = citiesRestockTarget[cityId];
 
     commit('updateCityForCycle', { cityId });
 
     commit('cityBuyResources', {
       cityId,
-      target: citiesRestockTarget[cityId]
+      target
     });
 
     commit('cityConsumeResources', {
       cityId,
-      demand: citiesDemand[cityId]
+      demand
     });
 
-    _.each(facConfigsOrdered, (facConfig, facKey) => {
+    _.each(facConfigsOrdered, (facConfig) => {
       commit('cityFactoryProduction', {
         cityId,
-        facKey,
+        facKey: facConfig.key,
         facConfig
       });
     });
@@ -69,14 +71,14 @@ export const cycleCities = function(
     //this is the last step because it should not affect production
     commit('cityPopulationMigrate', {
       cityId,
-      demand: citiesDemand[cityId],
+      demand
     });
   });
 };
 
 //current city ============
 export const cityExpandFactory = function(
-  { getters, commit },
+  { getters, commit, dispatch },
   { factoryKey }
   ) {
   if (true) {
@@ -87,11 +89,13 @@ export const cityExpandFactory = function(
       factoryKey,
       cost: {}
     });
+
+    dispatch('saveGame');
   }
 };
 
 export const moveWorkersToFactory = function(
-  { getters, commit },
+  { getters, commit, dispatch },
   { factoryKey, changeAmount }
   ) {
 
@@ -113,5 +117,7 @@ export const moveWorkersToFactory = function(
       changeAmount,
       popType
     });
+
+    dispatch('saveGame');
   }
 };
