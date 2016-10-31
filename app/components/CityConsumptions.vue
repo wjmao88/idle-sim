@@ -66,6 +66,9 @@ export default {
 
     resourceTable() {
       const city = this.currentCity;
+
+      if (!city.id) { return []; }
+
       const production = this.cityProductionCapacityTotal;
       const consumption = this.cityDemandTotal;
       const consumptionByPop = this.cityDemand;

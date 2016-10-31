@@ -25,11 +25,14 @@ const productions = {
 };
 
 const city = {
-  name: 'city',
   path: 'city/:cityId',
   component: CityPage,
   children: [
-    //{ path:'', redirect:'population' },
+    {
+      name: 'city',
+      path:'',
+      redirect:'population'
+    },
     consumptions,
     productions
   ]
@@ -51,7 +54,11 @@ const rootPath = {
   path: '/',
   component: MainPage,
   children: [
-    { path: '', redirect: 'world' },
+    {
+      name: 'root',
+      path: '',
+      redirect: 'world'
+    },
     city,
     world,
     research
