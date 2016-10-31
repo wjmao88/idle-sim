@@ -66,20 +66,28 @@ export const cityFactoryProduction = function (
   state,
   { cityId, facKey, facConfig }
 ) {
-  const city = state.world.cities[cityId];
+  const world = state.world;
+  const city = world.cities[cityId];
   const factory = city.factories[facKey];
 
   if (!factory) { return; }
 
   const allowedByRes = resourceMath.ratio(city.warehouse, facConfig.input);
 
-  const multiplesProduced = Math.min(factory.workerCount, ...allowedByRes);
+  const workersAfforded = Math.floor(world.money/facConfig.workerWage);
+
+  const multiplesProduced = Math.min(
+    workersAfforded, factory.workerCount, ...allowedByRes);
 
   const input = resourceMath.scale(facConfig.input, multiplesProduced);
   const output = resourceMath.scale(facConfig.output, multiplesProduced);
 
   city.warehouse = resourceMath.subtract(city.warehouse, input);
   city.warehouse = resourceMath.sum(city.warehouse, output);
+
+  const costAtFull = facConfig.workerWage * factory.workerCount;
+
+  world.money = Math.max(world.money - costAtFull, 0);
 };
 
 export const cityPopulationMigrate = function (

@@ -41,12 +41,12 @@ const facConfigsOrdered = _.orderBy(facConfigs, 'priority', 'desc');
 export const cycleCities = function(
   { commit, dispatch, getters }
   ) {
-  const citiesDemand = getters.citiesDemand;
-  const citiesRestockTarget = getters.citiesRestockTarget;
+  const citiesDemand = getters.citiesDemandTotal;
+  const citiesTarget = getters.citiesRestockTarget;
 
   _.each(getters.world.cities, (city, cityId) => {
     const demand = citiesDemand[cityId];
-    const target = citiesRestockTarget[cityId];
+    const target = citiesTarget[cityId];
 
     commit('updateCityForCycle', { cityId });
 
@@ -61,9 +61,10 @@ export const cycleCities = function(
     });
 
     _.each(facConfigsOrdered, (facConfig) => {
+      const facKey = facConfig.key;
       commit('cityFactoryProduction', {
         cityId,
-        facKey: facConfig.key,
+        facKey,
         facConfig
       });
     });

@@ -5,9 +5,10 @@ export default {
         'district': 'forest',
         'workerPopType': 'PT_BASE',
         'workerMaxPerLevel': 10,
+        'workerWage': 80,
         'input': {},
         'output': {
-            'RS_LUMBER': 20
+            'RS_LUMBER': 10
         }
     },
     'F2_GRAIN': {
@@ -16,9 +17,10 @@ export default {
         'district': 'fields',
         'workerPopType': 'PT_BASE',
         'workerMaxPerLevel': 10,
+        'workerWage': 50,
         'input': {},
         'output': {
-            'RS_GRAIN': 20
+            'RS_GRAIN': 10
         }
     }
 };

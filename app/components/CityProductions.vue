@@ -31,7 +31,7 @@ import ResourceTable from './ResourceTable.vue';
 export default {
   name: 'CityProductions',
   computed: {
-    ...mapGetters(['cityFactoriesInfo'])
+    ...mapGetters(['cityFactoriesInfo', 'citiesProductionCapacity'])
   },
   components: {
     FactoryCard

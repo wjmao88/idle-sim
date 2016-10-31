@@ -49,3 +49,9 @@ export const scale = function(collection, multiple){
     return (val || 0) * multiple;
   });
 };
+
+export const mapSumValues = function (mapOfMaps) {
+  return _.mapValues(mapOfMaps, (map) => {
+    return sum(...(_.values(map)));
+  });
+};

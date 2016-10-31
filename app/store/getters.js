@@ -32,16 +32,15 @@ export const cities = (state, getters) => {
 };
 
 export const citiesDemand = (state, getters) => {
-  const demand = _.mapValues(getters.cities, (city) => {
-
-    const demandByPop = _.map(city.population, (popStatus, popKey) => {
+  return _.mapValues(getters.cities, (city) => {
+    return _.mapValues(city.population, (popStatus, popKey) => {
       return resourceMath.scale(popConfigs[popKey].consumption, popStatus.total);
     });
-
-    return resourceMath.sum(...demandByPop);
   });
+};
 
-  return demand;
+export const citiesDemandTotal = (state, getters) => {
+  return resourceMath.mapSumValues(getters.citiesDemand);
 };
 
 /*
@@ -50,13 +49,46 @@ export const citiesDemand = (state, getters) => {
   At higher price, the target stockpile is lower, and vice versa.
 */
 export const citiesRestockTarget = (state, getters) => {
-  return _.mapValues(getters.citiesDemand, (demand) => {
-    return demand;
+  return _.mapValues(getters.citiesDemandTotal, (demand) => {
+    return resourceMath.scale(demand, 10);
   });
 };
 
+export const citiesProductionCapacity = (state, getters) => {
+  return _.mapValues(getters.cities, (city) => {
+    return _.mapValues(city.factories, (factory, facKey) => {
+      const facConfig = facConfigs[facKey];
+      const unitProd = resourceMath.subtract(facConfig.output, facConfig.input);
+      return resourceMath.scale(unitProd, factory.workerCount);
+    });
+  });
+};
+
+export const citiesProductionCapacityTotal = (state, getters) => {
+  return resourceMath.mapSumValues(getters.citiesProductionCapacity);
+};
 
 //current city =======
+
+export const cityDemand = (state, getters) => {
+  const city = getters.currentCity;
+  return getters.citiesDemand[city.id];
+};
+
+export const cityDemandTotal = (state, getters) => {
+  const city = getters.currentCity;
+  return getters.citiesDemandTotal[city.id];
+};
+
+export const cityProductionCapacity = (state, getters) => {
+  const city = getters.currentCity;
+  return getters.citiesProductionCapacity[city.id];
+};
+
+export const cityProductionCapacityTotal = (state, getters) => {
+  const city = getters.currentCity;
+  return getters.citiesProductionCapacityTotal[city.id];
+};
 
 export const resourcesConfig = () => {
   return resConfigs;
