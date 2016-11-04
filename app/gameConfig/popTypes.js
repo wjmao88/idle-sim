@@ -4,8 +4,8 @@ export default {
         priority: 1,
         name: 'peasant',
         consumption: {
-            'RS_GRAIN': 8,
-            'RS_LUMBER': 1
+            'RS_GRAIN': 10,
+            'RS_LUMBER': 5
         }
     },
     'PT_LOW': {

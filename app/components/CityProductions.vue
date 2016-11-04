@@ -22,16 +22,18 @@
 
 <script>
 
+import _ from 'lodash';
+
 import { mapGetters, mapActions } from 'vuex';
 
 import FactoryCard from './FactoryCard.vue';
-import PopulationTable from './PopulationTable.vue';
-import ResourceTable from './ResourceTable.vue';
 
 export default {
   name: 'CityProductions',
   computed: {
-    ...mapGetters(['cityFactoriesInfo', 'citiesProductionCapacity'])
+    ...mapGetters([
+      'cityFactoriesInfo'
+    ])
   },
   components: {
     FactoryCard

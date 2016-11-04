@@ -31,7 +31,7 @@ const city = {
     {
       name: 'city',
       path:'',
-      redirect:'population'
+      redirect:'consumptions'
     },
     consumptions,
     productions

@@ -1,17 +1,11 @@
 import _ from 'lodash';
 
-import * as resourceMath from '../utils/resourceMath';
-
-export const setWorld = function(state, world){
-    state.world = world;
-};
+import * as resourceMath from '../../utils/resourceMath';
 
 export const updateWorldForCycle = function(state){
     state.world.cycles += 1;
 };
 
-
-//cycle ==============
 export const updateCityForCycle = function (
   state,
   { cityId }
@@ -92,61 +86,37 @@ export const cityFactoryProduction = function (
 
 export const cityPopulationMigrate = function (
   state,
-  { cityId, demand }
+  { cityId, popKey, popConfig, popScore, popFactories }
 ) {
   const city = state.world.cities[cityId];
-  return;
-  var eligibleFactories = _.filter(city.factories, function(factory, factoryKey){
-    return factoriesConfig[factoryKey].workerPopType === popType &&
-    factory.workerCount > 0;
+  const popInfo = city.population[popKey];
+
+  const score = Math.log10(popScore);
+
+  const popChange = Math.round((Math.random() + 0.5) * score);
+
+  popInfo.total += popChange;
+  popInfo.idle += popChange;
+
+  const adjustment = popInfo.idle > 0? 0 : -popInfo.idle;
+  popInfo.idle += adjustment;
+  popInfo.working -= adjustment;
+
+  var eligibleFactories = _.filter(popFactories, function(facConfig){
+    const factory = city.factories[facConfig.key];
+    return factory && factory.workerCount > 0;
   });
 
-  if (factories.length === 0) {
+  if (eligibleFactories.length === 0) {
     console.error('somthing is wrong with worker count', city.id, factoryKey);
   }
 
-  var {locked, unlocked} = _.groupBy(eligibleFactories, 'lockStatus');
-
-  var index = Math.floor(Math.random() * unlocked.length);
-
-  if (unlocked[index.workerCount] < 0) {
-    var remainingChange = 0 - unlocked[index.workerCount];
-    var index2 = Math.floor(Math.random() * unlocked.length);
-    unlocked[index2].workerCount -= remainingChange;
+  //not very efficient
+  for (let counter = 0; counter <= adjustment; counter++) {
+    let index = Math.floor(Math.random() * eligibleFactories.length);
+    eligibleFactories[index].workerCount -= 1;
+    if (eligibleFactories[index].workerCount === 0) {
+      eligibleFactories.splice(index, 1);
+    }
   }
-};
-
-//single city =============
-export const commitCityWageChange = function(
-  state,
-  { cityId, popType, wage }
-  ) {
-  state.world.cities[cityId].population[popType].wage = wage;
-};
-
-export const exchangeResourceForFactoryLevel = function(
-  state,
-  { cityId, factoryKey, cost }
-  ) {
-  var city = state.world.cities[cityId];
-
-  _.each(cost, (amount, resourceType) => {
-    city.warehouse[resourceType] -= amount;
-  });
-
-  city.factories[factoryKey].level += 1;
-};
-
-export const addWorkerToFactory = function(
-  state,
-  { cityId, factoryKey, changeAmount, popType }
-  ) {
-  var city = state.world.cities[cityId];
-  var factory = city.factories[factoryKey];
-  var population = city.population[popType];
-
-  city.population[popType].idle -= changeAmount;
-  city.population[popType].working += changeAmount;
-
-  factory.workerCount += changeAmount;
 };

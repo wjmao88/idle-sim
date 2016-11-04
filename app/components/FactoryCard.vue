@@ -7,16 +7,25 @@
   <md-card v-md-theme="'default'">
     <md-card-header>
       <h2 class="md-title">
-        {{factory.name}}
+        {{factory.key}} - L{{factory.level}}
       </h2>
 
       <h3 class="md-subheading">
-        Level {{factory.level}}
-      </h3>
-      <h3 class="md-subheading">
-        {{factory.workerCount}}/{{factory.workerMax}} Workers
+        {{factory.workerCount}}/{{factory.workerMax}} Workers, Cost {{factory.wage}}
       </h3>
     </md-card-header>
+
+    <md-card-content>
+      <div v-if="factory.hasInput">Input</div>
+      <div v-for="(amount, key) in factory.inputTotal">
+        {{key}}: {{amount}}
+      </div>
+
+      <div v-if="factory.hasOutput">Output</div>
+      <div v-for="(amount, key) in factory.outputTotal">
+        {{key}}: {{amount}}
+      </div>
+    </md-card-content>
 
     <md-card-area>
       <div class="md-button-group">

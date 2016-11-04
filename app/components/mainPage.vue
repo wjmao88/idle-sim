@@ -55,7 +55,7 @@ export default {
 
       this.cyclesLeft -= 1;
 
-      if (this.cycles > 0) {
+      if (this.cyclesLeft > 0) {
         window.setTimeout(() => {
           this.doCycleWorld();
         }, 1000);

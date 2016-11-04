@@ -50,8 +50,8 @@ export const scale = function(collection, multiple){
   });
 };
 
-export const mapSumValues = function (mapOfMaps) {
-  return _.mapValues(mapOfMaps, (map) => {
-    return sum(...(_.values(map)));
+export const mapSumValues = function (mapOfMapsOfMaps) {
+  return _.mapValues(mapOfMapsOfMaps, (mapOfMaps) => {
+    return sum(...(_.values(mapOfMaps)));
   });
 };
