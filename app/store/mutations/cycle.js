@@ -89,7 +89,7 @@ export const cityPopulationMigrate = function (
   { cityId, popKey, popConfig, popScore, popFactories }
 ) {
   const city = state.world.cities[cityId];
-  const popInfo = city.population[popKey];
+  const popInfo = city.population[popKey] || { total: 0, working: 0, idle: 0};
 
   const score = Math.log10(popScore);
 
@@ -118,5 +118,9 @@ export const cityPopulationMigrate = function (
     if (eligibleFactories[index].workerCount === 0) {
       eligibleFactories.splice(index, 1);
     }
+  }
+
+  if (!city.population[popKey]){
+    city.population[popKey] = popInfo;
   }
 };

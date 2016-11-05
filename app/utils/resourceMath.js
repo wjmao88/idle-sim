@@ -50,6 +50,18 @@ export const scale = function(collection, multiple){
   });
 };
 
+export const atLeast = function(collection, compare){
+  return _.every(collection, (val) => {
+    return (val || 0) >= compare;
+  });
+};
+
+export const atMost = function(collection, compare){
+  return _.every(collection, (val) => {
+    return (val || 0) <= compare;
+  });
+};
+
 export const mapSumValues = function (mapOfMapsOfMaps) {
   return _.mapValues(mapOfMapsOfMaps, (mapOfMaps) => {
     return sum(...(_.values(mapOfMaps)));

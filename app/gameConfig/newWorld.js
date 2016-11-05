@@ -20,11 +20,9 @@ export default {
             },
             population: {
                 'PT_BASE': {
-                    wage: 90,
                     total: 10,
                     working: 0,
-                    idle: 10,
-                    happiness: 1
+                    idle: 10
                 }
             },
             prices: {

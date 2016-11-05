@@ -1,18 +1,30 @@
+import _ from 'lodash';
 
 import popConfigs from '../../gameConfig/popTypes';
 import facConfigs from '../../gameConfig/factories';
 import resConfigs from '../../gameConfig/resources';
+import techConfigs from '../../gameConfig/tech';
 
-export const resourcesConfig = () => {
-  return resConfigs;
+export const technologyConfig = () => {
+  return techConfigs;
 };
 
-export const factoriesConfig = () => {
-  return facConfigs;
+export const resourcesConfig = (state, getters) => {
+  return _.reduce(getters.researchResMod, (resConfigs, resMod) => {
+    return resMod(resConfigs);
+  }, resConfigs);
 };
 
-export const populationConfig = () => {
-  return popConfigs;
+export const factoriesConfig = (state, getters) => {
+  return _.reduce(getters.researchFacMod, (facConfigs, facMod) => {
+    return facMod(facConfigs);
+  }, facConfigs);
+};
+
+export const populationConfig = (state, getters) => {
+  return _.reduce(getters.researchPopMod, (popConfigs, popMod) => {
+    return popMod(popConfigs);
+  }, popConfigs);
 };
 
 export const factoriesConfigOrdered = (state, getters) => {

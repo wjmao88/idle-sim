@@ -1,5 +1,9 @@
 import * as resourceMath from '../../utils/resourceMath';
 
+export const cities = (state, getters) => {
+  return state.world.cities;
+};
+
 /*
   consumption/production calculation for all cities
 */

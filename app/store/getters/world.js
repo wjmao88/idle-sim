@@ -10,7 +10,3 @@ export const money = (state) => {
 export const world = (state) => {
   return state.world;
 };
-
-export const cities = (state, getters) => {
-  return state.world.cities;
-};
