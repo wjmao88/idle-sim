@@ -13,7 +13,7 @@
         <th class="number">Total</th>
         <th class="number"
           v-for="popInfo in cityPopulationInfo">
-          {{ popInfo.name }}
+          {{ popInfo.key }}
         </th>
       </thead>
       <tbody>
@@ -56,13 +56,13 @@
         <th class="number">Consumption</th>
         <th class="number"
           v-for="popInfo in cityPopulationInfo">
-          {{ popInfo.name }}
+          {{ popInfo.key }}
         </th>
       </thead>
       <tbody>
         <tr v-for="resoruceInfo in resourceTable">
           <td>
-            <span>{{resoruceInfo.name}}</span>
+            <span>{{resoruceInfo.key}}</span>
           </td>
           <td class="number">
             <span>{{resoruceInfo.warehouse}}</span>
@@ -102,7 +102,6 @@ export default {
       'money',
       'currentCity',
       'populationConfig',
-      'resourcesConfig',
       'cityDemand',
       'cityDemandTotal',
       'cityWorkerWageByPop',
@@ -132,17 +131,17 @@ export default {
       const consumption = this.cityDemandTotal;
       const consumptionByPop = this.cityDemand;
 
-      return _.map(this.resourcesConfig, function(config, resKey) {
+      return _.map(city.warehouse, function(warehouse, key) {
         return {
-          name: config.name,
-          warehouse: city.warehouse[resKey],
-          stockpile: city.stockpile[resKey],
-          price: city.prices[resKey],
-          consumption: consumption[resKey],
-          production: production[resKey],
+          key,
+          warehouse,
+          stockpile: city.stockpile[key],
+          price: city.prices[key],
+          consumption: consumption[key],
+          production: production[key],
           population: _.mapValues(popsConfig, (c, popKey) => {
             return consumptionByPop[popKey] &&
-              consumptionByPop[popKey][resKey];
+              consumptionByPop[popKey][key];
           })
         };
       });

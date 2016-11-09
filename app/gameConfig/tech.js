@@ -15,7 +15,8 @@ export default {
 
   TC_BREW: {
     cost: 500,
-    unlocks: ['FC_BREWERY']
+    unlockFactories: ['FC_BREWERY'],
+    unlockResources: ['RS_BEER']
   },
 
   TC_FARMING: {
@@ -30,8 +31,9 @@ export default {
 
   TC_MINING: {
     cost: 1000,
-    unlocks: ['FC_SMELTER'],
     unlockTechs: ['TC_STEEL'],
+    unlockFactories: ['FC_SMELTER'],
+    unlockResources: ['RS_COAL', 'RS_IRON'],
   },
 
   TC_STEEL: {

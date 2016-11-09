@@ -13,11 +13,15 @@
 
     <md-card-content>
       <div>Unlocks</div>
-      <div v-for="key in tech.unlocks">
+      <div v-for="key in tech.unlockTechs">
         {{key}}
       </div>
 
-      <div v-for="key in tech.unlockTechs">
+      <div v-for="key in tech.unlockFactories">
+        {{key}}
+      </div>
+
+      <div v-for="key in tech.unlockResources">
         {{key}}
       </div>
     </md-card-content>
