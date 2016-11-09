@@ -29,7 +29,6 @@ export const citiesDemandCost = (state, getters) => {
   });
 };
 
-
 //more detailed version of demand cost by each resource
 //mostly used as a weight
 export const citiesDemandBaseCostByRes = (state, getters) => {

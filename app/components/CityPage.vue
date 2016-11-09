@@ -36,8 +36,6 @@
 
 import { mapGetters } from 'vuex';
 
-import ResourceTable from './ResourceTable.vue';
-
 export default {
   name: 'CityPage',
   computed: {
