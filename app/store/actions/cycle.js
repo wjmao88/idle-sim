@@ -2,9 +2,7 @@
 export const cycleWorld = function({ commit, dispatch }) {
   commit('updateWorldForCycle');
 
-  dispatch('cycleCities');
-
-  dispatch('saveGame');
+  dispatch('cycleCities').then(() => dispatch('saveGame'));
 };
 
 export const cycleCities = function(

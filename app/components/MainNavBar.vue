@@ -6,7 +6,7 @@
 
 <template>
 
-<md-toolbar>
+<md-toolbar v-md-theme="'default'">
 
   <span class="md-primary">
     Money: {{world.money}}
@@ -18,8 +18,8 @@
   </md-button>
 
   <md-button class="md-accent"
-    href="#/research">
-    Research
+    href="#/technology">
+    Technology
   </md-button>
 
 </md-toolbar>

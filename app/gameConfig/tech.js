@@ -4,9 +4,18 @@
 //resourceMods
 
 export default {
+  TC_RESEARCH: {
+    cost: 100,
+    unlockTechs: [
+      'TC_BREW',
+      'TC_FARMING',
+      'TC_MINING'
+    ]
+  },
+
   TC_BREW: {
     cost: 500,
-    unlocks: []
+    unlocks: ['FC_BREWERY']
   },
 
   TC_FARMING: {
@@ -20,8 +29,12 @@ export default {
   },
 
   TC_MINING: {
-    cost: 500,
+    cost: 1000,
     unlocks: ['FC_SMELTER'],
     unlockTechs: ['TC_STEEL'],
   },
+
+  TC_STEEL: {
+    cost: 3000
+  }
 };

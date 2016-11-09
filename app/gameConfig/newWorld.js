@@ -1,6 +1,9 @@
 export default {
     'cycles': 0,
     'money': 1000,
+    'technologies': {
+        TC_RESEARCH: false
+    },
     'cities': {
         11111: {
             'id': 11111,

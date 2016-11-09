@@ -3,11 +3,11 @@ import _ from 'lodash';
 import techConfigs from '../../gameConfig/tech';
 
 export const availableTechs = function (state, getters) {
-  return _.filter(getters.world.technologies, (t) => !t);
+  return _.keys(_.omitBy(getters.world.technologies));
 };
 
 export const completedTechs = function (state, getters) {
-  return _.filter(getters.world.technologies, (t) => t);
+  return _.keys(_.pickBy(getters.world.technologies));
 };
 
 export const resourcesMods = function (state, getters) {

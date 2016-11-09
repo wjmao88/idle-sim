@@ -3,7 +3,9 @@ import VueRouter from 'vue-router';
 
 import WorldPage from './components/WorldPage.vue';
 import CityPage from './components/CityPage.vue';
-import ResearchPage from './components/ResearchPage.vue';
+import TechnologyPage from './components/TechnologyPage.vue';
+import TechsCompletedPage from './components/TechsCompletedPage.vue';
+import TechsAvailablePage from './components/TechsAvailablePage.vue';
 import MainPage from './components/MainPage.vue';
 import CityConsumptions from './components/CityConsumptions.vue';
 import CityProductions from './components/CityProductions.vue';
@@ -44,10 +46,30 @@ const world = {
   component: WorldPage,
 };
 
-const research = {
-  name: 'research',
-  path: 'research',
-  component: ResearchPage
+const completedTechs = {
+  name: 'completedTechs',
+  path: 'completed-techs',
+  component: TechsCompletedPage
+};
+
+const availableTechs = {
+  name: 'availableTechs',
+  path: 'available-techs',
+  component: TechsAvailablePage
+};
+
+const technology = {
+  path: 'technology',
+  component: TechnologyPage,
+  children: [
+    {
+      name: 'technology',
+      path:'',
+      redirect:'available-techs'
+    },
+    completedTechs,
+    availableTechs
+  ]
 };
 
 const rootPath = {
@@ -61,7 +83,7 @@ const rootPath = {
     },
     city,
     world,
-    research
+    technology
   ]
 };
 

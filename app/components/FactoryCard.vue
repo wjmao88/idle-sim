@@ -4,7 +4,7 @@
 
 <template>
 
-  <md-card v-md-theme="'default'">
+  <md-card v-md-theme="'prod'">
     <md-card-header>
       <h2 class="md-title">
         {{factory.key}} - L{{factory.level}}
@@ -27,16 +27,16 @@
       </div>
     </md-card-content>
 
-    <md-card-area>
-      <div class="md-button-group">
-        <md-button v-on:click="increase()">
-          <md-icon>add</md-icon>
-        </md-button>
-        <md-button v-on:click="decrease()">
-          <md-icon>remove</md-icon>
-        </md-button>
-      </div>
-    </md-card-area>
+    <md-card-actions>
+      <md-button class="md-raised md-primary"
+        v-on:click="increase()">
+        <md-icon>add</md-icon>
+      </md-button>
+      <md-button class="md-raised md-primary"
+        v-on:click="decrease()">
+        <md-icon>remove</md-icon>
+      </md-button>
+    </md-card-actions>
   </md-card>
 
 </template>

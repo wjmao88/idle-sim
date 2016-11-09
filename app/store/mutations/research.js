@@ -5,8 +5,12 @@ export const upgradeTech = function(
   { techKey, techConfig }
   ) {
 
-  state.world.moey -= techConfig.cost;
-  state.world.technologies[techKey] = true;
+  state.world.money -= techConfig.cost;
+
+  //to trigger reactivity
+  state.world.technologies = _.assign({}, state.world.technologies, {
+    [techKey]: true
+  });
 
   _.each(techConfig.unlocks, (facKey) => {
     _.each(state.world.cities, (city) => {
@@ -18,7 +22,7 @@ export const upgradeTech = function(
     });
   });
 
-  _.each(techConfig.unlockTechss, (newTech) => {
+  _.each(techConfig.unlockTechs, (newTech) => {
     if (!state.world.technologies[newTech]){
       state.world.technologies[newTech] = false;
     }

@@ -1,16 +1,10 @@
 <style scoped lang="sass">
 
-.city-factories {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
-
 </style>
 
 <template>
 
-<div class="city-factories">
+<div class="cards-container">
   <factory-card
     v-for="factory in cityFactoriesInfo"
     :key="factory.key"

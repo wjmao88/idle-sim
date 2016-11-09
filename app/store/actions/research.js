@@ -9,7 +9,9 @@ export const upgradeTech = function(
 
   const techConfig = getters.technologyConfig[techKey];
 
-  if (world.moey >= techConfig.cost) {
+  if (getters.world.money >= techConfig.cost) {
     commit('upgradeTech', { techKey, techConfig });
+    dispatch('saveGame');
   }
+
 };

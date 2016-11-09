@@ -1,5 +1,25 @@
 import * as resourceMath from '../../utils/resourceMath';
 
+export const availableTechsInfo = (state, getters) => {
+  const configs = getters.technologyConfig;
+  return _.map(getters.availableTechs, (key) => {
+    return {
+      key,
+      ...configs[key],
+    };
+  });
+};
+
+export const completedTechsInfo = (state, getters) => {
+  const configs = getters.technologyConfig;
+  return _.map(getters.completedTechs, (key) => {
+    return {
+      key,
+      ...configs[key],
+    };
+  });
+};
+
 export const citiesInfo = (state, getters) => {
   return _.map(getters.world.cities, (city) => ({
     id: city.id,
