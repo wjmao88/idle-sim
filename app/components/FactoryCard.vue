@@ -4,7 +4,7 @@
 
 <template>
 
-  <md-card v-md-theme="'prod'">
+  <md-card>
     <md-card-header>
       <h2 class="md-title">
         {{factory.key}} - L{{factory.level}}

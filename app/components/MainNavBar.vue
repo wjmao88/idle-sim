@@ -1,23 +1,21 @@
 <style scoped lang="sass">
-.md-button-group {
-  align-items: center;
-}
+
 </style>
 
 <template>
 
-<md-toolbar v-md-theme="'default'">
+<md-toolbar>
 
   <span class="md-primary">
     Money: {{world.money}}
   </span>
 
-  <md-button class="md-accent"
+  <md-button class="md-raised"
     href="#/world">
     World
   </md-button>
 
-  <md-button class="md-accent"
+  <md-button class="md-raised"
     href="#/technology">
     Technology
   </md-button>

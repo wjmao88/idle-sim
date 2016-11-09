@@ -1,7 +1,6 @@
 <template>
 
-
-  <md-card v-md-theme="'tech'">
+  <md-card>
     <md-card-header>
       <h2 class="md-title">
         {{tech.key}}
@@ -24,7 +23,7 @@
     </md-card-content>
 
     <md-card-actions>
-      <md-button
+      <md-button class="md-raised md-primary"
         v-if="!disabled"
         v-on:click="upgradeTech({ techKey: tech.key })">
         <md-icon>add</md-icon>

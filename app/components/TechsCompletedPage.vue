@@ -1,7 +1,7 @@
 <template>
 
   <div>
-    <h1>Completed Technologies</h1>
+    <h1 class="page-title">Completed Technologies</h1>
 
     <div class="cards-container">
       <technology-card

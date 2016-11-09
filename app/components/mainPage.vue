@@ -4,7 +4,7 @@
 
 <template>
 
-<div class="main-page">
+<div class="main-page" v-md-theme="theme">
   <div class="md-button-group">
     <md-button v-on:click="cycleWorld(1)">cycle 1</md-button>
     <md-button v-on:click="cycleWorld(10)">cycle 10</md-button>
@@ -36,7 +36,7 @@ export default {
       };
   },
   computed: {
-    ...mapGetters(['world'])
+    ...mapGetters(['world', 'theme'])
   },
   methods: {
     ...mapActions(['resetWorld']),

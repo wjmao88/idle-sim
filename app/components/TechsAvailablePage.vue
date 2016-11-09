@@ -1,7 +1,7 @@
 <template>
 
   <div>
-    <h1>Available Technologies</h1>
+    <h1 class="page-title">Available Technologies</h1>
 
     <div class="cards-container">
       <technology-card

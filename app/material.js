@@ -5,15 +5,19 @@ Vue.use(VueMaterial);
 
 Vue.material.theme.registerAll({
     default: {
-        primary: 'grey',
-        accent: 'orange'
+        primary: 'indigo',
+        accent: 'light-blue'
     },
     tech: {
-        primary: 'purple',
+        primary: 'deep-purple',
         accent: 'yellow'
     },
     prod: {
         primary: 'brown',
         accent: 'amber'
+    },
+    consume: {
+        primary: 'teal',
+        accent: 'lime'
     }
 });
