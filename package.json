@@ -5,7 +5,9 @@
   "main": "server/index.js",
   "scripts": {
     "start": "node server/index.js",
-    "nodemon": "nodemon server/index.js"
+    "nodemon": "nodemon server/index.js",
+
+    "validate-config": "node dist/validateConfigs.js"
   },
   "dependencies": {
     "hapi": "^15.1.1",

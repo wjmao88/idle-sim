@@ -1,66 +1,43 @@
 export default {
-    'RS_GRAIN': {
-        key: 'RS_GRAIN',
-        cost: 10,
-    },
-    'RS_LUMBER': {
-        key: 'RS_LUMBER',
-        cost: 10,
-    },
-    'RS_BREAD': {
-        key: 'RS_BREAD',
-        cost: 20
-    },
-    'RS_BEER': {
-        key: 'RS_BEER',
-        cost: 20
-    },
-    'RS_MEAT': {
-        key: 'RS_MEAT',
-        cost: 20
-    },
-    'RS_OIL': {
-        key: 'RS_OIL',
-        cost: 20
-    },
-    'RS_HEMP': {
-        key: 'RS_HEMP',
-        cost: 20
-    },
-    'RS_WOOL': {
-        key: 'RS_WOOL',
-        cost: 20
-    },
-    'RS_COTTON': {
-        key: 'RS_COTTON',
-        cost: 20
-    },
-    'RS_LEATHER': {
-        key: 'RS_LEATHER',
-        cost: 20
-    },
-    'RS_HONEY': {
-        key: 'RS_HONEY',
-        cost: 20
-    },
-    'RS_FRUIT': {
-        key: 'RS_FRUIT',
-        cost: 20
-    },
-    'RS_WINE': {
-        key: 'RS_WINE',
-        cost: 20
-    },
-    'RS_COAL': {
-        key: 'RS_COAL',
-        cost: 20
-    },
-    'RS_IRON': {
-        key: 'RS_IRON',
-        cost: 20
-    },
-    'RS_STEEL': {
-        key: 'RS_STEEL',
-        cost: 20
-    }
+    //materials
+    R_LUMBER: 10,
+    R_STONE: 10,
+    R_CLAY: 10,
+    R_BRICK: 10,
+    R_PITCH: 10,
+
+    //raw food
+    R_GRAIN: 10,
+    R_MEAT: 20,
+    R_FISH: 20,
+    R_SALT: 20,
+    R_FRUIT: 20,
+    R_HONEY: 20,
+
+    //prepared food
+    R_BEER: 20,
+    R_BREAD: 20,
+    R_WINE: 20,
+    R_SWEETS: 20,
+    R_RATION: 20,
+
+    //textile plants
+    R_HEMP: 20,
+    R_COTTON: 20,
+    R_WOOL: 20,
+    R_SKIN: 20,
+
+    //textiles
+    R_CLOTH: 20,
+    R_LEATHER: 20,
+    R_VELVET: 20,
+
+    //living
+    R_OIL: 20,
+
+    //metals
+    R_ORE: 20,
+    R_COAL: 20,
+    R_IRON: 20,
+    R_STEEL: 20
 };

@@ -60,27 +60,31 @@
         </th>
       </thead>
       <tbody>
-        <tr v-for="resoruceInfo in resourceTable">
+        <tr v-for="resourceInfo in resourceTable">
           <td>
-            <span>{{resoruceInfo.key}}</span>
+            <span>{{resourceInfo.key}}</span>
           </td>
           <td class="number">
-            <span>{{resoruceInfo.warehouse}}</span>
+            <span>{{resourceInfo.warehouse}}</span>
           </td>
           <td class="number">
-            <span>{{resoruceInfo.price}}</span>
+            <input v-model="resourceInfo.price"
+              v-on:blur="cityResourcePriceChange({
+                resourceKey: resourceInfo.key,
+                newPrice: resourceInfo.price
+              })">
           </td>
           <td class="number">
-            <span>{{resoruceInfo.stockpile}}</span>
+            <span>{{resourceInfo.stockpile}}</span>
           </td>
           <td class="number">
-            <span>{{resoruceInfo.production}}</span>
+            <span>{{resourceInfo.production}}</span>
           </td>
           <td class="number">
-            <span>{{resoruceInfo.consumption}}</span>
+            <span>{{resourceInfo.consumption}}</span>
           </td>
           <td class="number"
-            v-for="consumption in resoruceInfo.population">
+            v-for="consumption in resourceInfo.population">
             <span>{{ consumption }}</span>
           </td>
         </tr>
@@ -97,6 +101,9 @@ import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'CityConsumptions',
+  methods: {
+    ...mapActions(['cityResourcePriceChange'])
+  },
   computed: {
     ...mapGetters([
       'money',

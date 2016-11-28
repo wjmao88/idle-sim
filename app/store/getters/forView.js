@@ -1,5 +1,7 @@
 import * as resourceMath from '../../utils/resourceMath';
 
+const WOKER_MAX_PER_LEVEL = 5;
+
 export const availableTechsInfo = (state, getters) => {
   const configs = getters.technologyConfig;
   return _.map(getters.availableTechs, (key) => {
@@ -55,7 +57,7 @@ export const cityFactoriesInfo = (state, getters) => {
       inputTotal: resourceMath.scale(config.input, instance.workerCount),
       outputTotal: resourceMath.scale(config.output, instance.workerCount),
       wage: config.workerWage * instance.workerCount,
-      workerMax: config.workerMaxPerLevel * instance.level
+      workerMax: WOKER_MAX_PER_LEVEL * instance.level
     };
   });
 };

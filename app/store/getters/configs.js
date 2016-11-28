@@ -5,26 +5,29 @@ import facConfigs from '../../gameConfig/factories';
 import resConfigs from '../../gameConfig/resources';
 import techConfigs from '../../gameConfig/tech';
 
+const addKeys = configs => _.mapValues(configs, (config, key) => _.extend(config, {key}) );
+
+const keyPopConfigs = addKeys(popConfigs);
+const keyFacConfigs = addKeys(facConfigs);
+const keyTechConfigs = addKeys(techConfigs);
+const keyResConfigs = _.mapValues(resConfigs, (cost, key) => ({ cost, key }));
+
 export const technologyConfig = () => {
-  return techConfigs;
+  return keyTechConfigs;
 };
 
+const applyMod = (config, mod) => mod(config);
+
 export const resourcesConfig = (state, getters) => {
-  return _.reduce(getters.researchResMod, (resConfigs, resMod) => {
-    return resMod(resConfigs);
-  }, resConfigs);
+  return _.reduce(getters.researchResMod, applyMod, keyResConfigs);
 };
 
 export const factoriesConfig = (state, getters) => {
-  return _.reduce(getters.researchFacMod, (facConfigs, facMod) => {
-    return facMod(facConfigs);
-  }, facConfigs);
+  return _.reduce(getters.researchFacMod, applyMod, keyFacConfigs);
 };
 
 export const populationConfig = (state, getters) => {
-  return _.reduce(getters.researchPopMod, (popConfigs, popMod) => {
-    return popMod(popConfigs);
-  }, popConfigs);
+  return _.reduce(getters.researchPopMod, applyMod, keyPopConfigs);
 };
 
 export const factoriesConfigOrdered = (state, getters) => {
@@ -36,5 +39,5 @@ export const factoriesByWorkerType = (state, getters) => {
 };
 
 export const resourcesBasePrice = (state, getters) => {
-  return _.mapValues(getters.resourcesConfig, 'cost');
+  return resConfigs;
 };

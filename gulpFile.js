@@ -28,6 +28,17 @@ gulp.task('scripts', function() {
         .pipe(notify('scripts done'));
 });
 
+gulp.task('validation', function() {
+    return gulp.src('app/gameConfig/validateConfigs.js')
+        .pipe(named())
+        .pipe(eslint('.eslintrc.js').on('error', logError))
+        .pipe(webpack(webpackConfg).on('error', logError))
+        //.pipe(rename({ suffix: '.min' }))
+        .pipe(gulp.dest('dist'))
+        .pipe(notify('scripts done'));
+});
+
+
 gulp.task('sass', function() {
     return gulp.src('app/styles/main.sass')
         .pipe(sass().on('error', sass.logError))
@@ -48,7 +59,7 @@ gulp.task('vue-material-css', function(){
     return gulp.src('node_modules/vue-material/dist/vue-material.css')
         .pipe(named())
         .pipe(gulp.dest('dist/'));
-})
+});
 
 gulp.task('watch', function() {
 
@@ -57,7 +68,7 @@ gulp.task('watch', function() {
     gulp.watch('app/**/*.sass', ['sass', 'vue-material-css']);
 
     // Watch .js files
-    gulp.watch('app/**/*.js', ['scripts']);
+    gulp.watch('app/**/*.js', ['scripts', 'validation']);
 
     gulp.watch('app/**/*.vue', ['scripts']);
 

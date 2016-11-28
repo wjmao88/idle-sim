@@ -2,11 +2,11 @@ import _ from 'lodash';
 
 import * as resourceMath from '../../utils/resourceMath';
 
-export const commitCityWageChange = function(
+export const cityResourcePriceChange = function(
   state,
-  { cityId, popType, wage }
+  { cityId, resourceKey, newPrice }
   ) {
-  state.world.cities[cityId].population[popType].wage = wage;
+  state.world.cities[cityId].prices[resourceKey] = newPrice;
 };
 
 export const exchangeResourceForFactoryLevel = function(

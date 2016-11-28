@@ -1,4 +1,21 @@
 
+export const cityResourcePriceChange = function(
+  { getters, commit, dispatch },
+  { resourceKey, newPrice }
+  ) {
+
+  if (true) {
+    const cityId = getters.currentCity.id;
+
+    commit('cityResourcePriceChange', {
+      cityId,
+      resourceKey,
+      newPrice
+    });
+
+    dispatch('saveGame');
+  }
+};
 export const cityExpandFactory = function(
   { getters, commit, dispatch },
   { factoryKey }
